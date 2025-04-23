@@ -56,7 +56,7 @@ class code_base {
         let res = settings.get(key);
         if (common.is_empty_obj(res)) {
             log.warn(this.name + " get key [" + key + "] return [" + res + "]");
-            if (null != default_value) {
+            if (default_value != null) {
                 res = default_value;
             }
             else {
@@ -64,15 +64,15 @@ class code_base {
             }
         }
 
-        if (null != real_key) {
+        if (real_key != null) {
             key = real_key;
         }
 
-        if ("boolean" === typeof (res)) {
+        if (typeof (res) === "boolean") {
             return res ? key : "";
         }
 
-        if ("number" === typeof (res)) {
+        if (typeof (res) === "number") {
             res = res.toString();
         }
 
@@ -84,10 +84,10 @@ class code_base {
      * @param {any} key
      * @param {any} default_value
      */
-     get_cfg_value(settings, key, default_value = null) {
-        return settings.get(key,default_value);
+    get_cfg_value(settings, key, default_value = null) {
+        return settings.get(key, default_value);
     }
-    
+
     /**
      * @param {string} root_path
      * @param {string} exe_name_win

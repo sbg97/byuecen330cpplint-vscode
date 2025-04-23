@@ -1,15 +1,15 @@
 {
-	"name": "cpp-check-lint",
-	"displayName": "cpp-check-lint",
-	"description": "cppcheck cpplint",
+	"name": "byuecen330cpplint-vscode",
+	"displayName": "byuecen330cpplint-vscode",
+	"description": "Automatically runs byuecen330cpplint in vscode",
 	"keywords": [
-		"cppcheck",
-		"cpplint"
+		"cpplint",
+		"BYU ECEN 330"
 	],
-	"version": "1.5.7",
-	"publisher": "QiuMingGe",
+	"version": "1.0.0",
+	"publisher": "Stephen Griffith",
 	"engines": {
-		"vscode": "^1.52.0"
+		"vscode": "^1.75.0"
 	},
 	"categories": [
 		"Linters"
@@ -17,29 +17,11 @@
 	"icon": "bin/icon.png",
 	"activationEvents": [
 		"onLanguage:cpp",
-		"onLanguage:c",
-		"onCommand:cpp-check-lint.cppcheck",
-		"onCommand:cpp-check-lint.cppcheckdir",
-		"onCommand:cpp-check-lint.cppcheckcmd",
-		"onCommand:cpp-check-lint.cpplint",
-		"onCommand:cpp-check-lint.cpplintdir",
-		"onCommand:cpp-check-lint.cpplintcmd"
+		"onLanguage:c"
 	],
 	"main": "./src/extension.js",
 	"contributes": {
 		"commands": [
-			{
-				"command": "cpp-check-lint.cppcheck",
-				"title": "cppcheck-file"
-			},
-			{
-				"command": "cpp-check-lint.cppcheckdir",
-				"title": "cppcheck-dir"
-			},
-			{
-				"command": "cpp-check-lint.cppcheckcmd",
-				"title": "cppcheck-cmd"
-			},
 			{
 				"command": "cpp-check-lint.cpplint",
 				"title": "cpplint-file"
@@ -63,21 +45,6 @@
 			"cpp-check-lint.editor.context": [
 				{
 					"when": "resourceLangId == c || resourceLangId == cpp || resourceLangId == h || resourceLangId == hpp",
-					"command": "cpp-check-lint.cppcheck",
-					"group": "cpp-check-lint"
-				},
-				{
-					"when": "resourceLangId == c || resourceLangId == cpp || resourceLangId == h || resourceLangId == hpp",
-					"command": "cpp-check-lint.cppcheckdir",
-					"group": "cpp-check-lint"
-				},
-				{
-					"when": "resourceLangId == c || resourceLangId == cpp || resourceLangId == h || resourceLangId == hpp",
-					"command": "cpp-check-lint.cppcheckcmd",
-					"group": "cpp-check-lint"
-				},
-				{
-					"when": "resourceLangId == c || resourceLangId == cpp || resourceLangId == h || resourceLangId == hpp",
 					"command": "cpp-check-lint.cpplint",
 					"group": "cpp-check-lint"
 				},
@@ -99,21 +66,6 @@
 				}
 			],
 			"cpp-check-lint.explorer.context": [
-				{
-					"when": "resourceLangId == c || resourceLangId == cpp || resourceLangId == h || resourceLangId == hpp",
-					"command": "cpp-check-lint.cppcheck",
-					"group": "cpp-check-lint"
-				},
-				{
-					"when": "explorerResourceIsFolder",
-					"command": "cpp-check-lint.cppcheckdir",
-					"group": "cpp-check-lint"
-				},
-				{
-					"when": "resourceLangId == c || resourceLangId == cpp || resourceLangId == h || resourceLangId == hpp || explorerResourceIsFolder",
-					"command": "cpp-check-lint.cppcheckcmd",
-					"group": "cpp-check-lint"
-				},
 				{
 					"when": "resourceLangId == c || resourceLangId == cpp || resourceLangId == h || resourceLangId == hpp",
 					"command": "cpp-check-lint.cpplint",
@@ -152,7 +104,7 @@
 				},
 				"cpp-check-lint.--log": {
 					"type": "number",
-					"default": 0,
+					"default": 4,
 					"enum": [
 						0,
 						1,
@@ -168,207 +120,6 @@
 						"Debug"
 					]
 				},
-				"cpp-check-lint.cppcheck.--addon=": {
-					"type": "array",
-					"default": [],
-					"examples": [[
-						"cert",
-						{
-							"script": "misra.py",
-							"args": [
-								"--rule-texts=/home/user/misra.txt"
-							]
-						},
-						"y2038.py",
-						"C:\\UsersAdministrator\\hreadsafety.json"
-					]],
-					"description": "see ReadMe"
-				},
-				"cpp-check-lint.cppcheck.--premium=": {
-					"type": "array",
-					"examples": [
-						[
-							"misra-c-2012",
-							"cert-c-2016"
-						]
-					],
-					"default": [],
-					"description": "premium"
-				},
-				"cpp-check-lint.cppcheck.--customargs=": {
-					"type": "array",
-					"default": [],
-					"description": "customargs",
-					"examples": [
-						[
-							"--library=<cfg>",
-							"--check-level=<level>"
-						]
-					]
-				},
-				"cpp-check-lint.cppcheck.--enable": {
-					"type": "boolean",
-					"default": true,
-					"description": "Enable or disable the cppcheck"
-				},
-				"cpp-check-lint.cppcheck.--quick_fix": {
-					"type": "boolean",
-					"default": true,
-					"description": "Whether to enable experimental \"Quick Fix\" feature."
-				},
-				"cpp-check-lint.cppcheck.--onsave": {
-					"type": "boolean",
-					"default": true,
-					"description": "Whether cppcheck is run on save"
-				},
-				"cpp-check-lint.cppcheck.--executable": {
-					"type": "string",
-					"default": "cppcheck",
-					"description": "The path to the cppcheck executable(builtin binaries will be used if empty or run error)."
-				},
-				"cpp-check-lint.cppcheck.--enable=": {
-					"type": "string",
-					"default": "warning",
-					"description": "Enable additional checks. The available ids are: all, warning, style, performance, portability, information, unusedFunction, missingInclide"
-				},
-				"cpp-check-lint.cppcheck.-i ": {
-					"type": "array",
-					"examples": [[
-						"build",
-						"src/utils"
-					]],
-					"default": [],
-					"description": "Give a source file or source file directory to exclude\r\nfrom the check. This applies only to source files so\r\nheader files included by source files are not matched.\r\nDirectory name is matched to all parts of the path.\r\n auto add base path"
-				},
-				"cpp-check-lint.cppcheck.--inconclusive": {
-					"type": "boolean",
-					"default": false,
-					"description": "Allow that Cppcheck reports even though the analysis is\r\ninconclusive.\r\nThere are false positives with this option. Each result\r\nmust be carefully investigated before you know if it is\r\ngood or bad."
-				},
-				"cpp-check-lint.cppcheck.--inline-suppr": {
-					"type": "boolean",
-					"default": true,
-					"description": "Enable inline suppressions. Use them by placing one or\r\nmore comments, like: '// cppcheck-suppress warningId'\r\non the lines before the warning to suppress."
-				},
-				"cpp-check-lint.cppcheck.-j": {
-					"type": [
-						"number",
-						"null"
-					],
-					"default": 4,
-					"description": "Start <jobs> threads to do the checking simultaneously."
-				},
-				"cpp-check-lint.cppcheck.--language=": {
-					"type": "string",
-					"default": "c++",
-					"enum": [
-						"c",
-						"c++"
-					],
-					"description": "Forces cppcheck to check all files as the given language. Valid values are: c, c++"
-				},
-				"cpp-check-lint.cppcheck.--platform=": {
-					"type": "string",
-					"default": "native",
-					"enum": [
-						"unix32",
-						"unix64",
-						"win32A",
-						"win32W",
-						"win64",
-						"avr8",
-						"elbrus-e1cp",
-						"pic8",
-						"pic8-enhanced",
-						"pic16",
-						"mips32",
-						"native",
-						"unspecified"
-					],
-					"description": " Specifies platform specific types and sizes."
-				},
-				"cpp-check-lint.cppcheck.--report-progress": {
-					"type": "boolean",
-					"default": true,
-					"enum": [
-						true
-					]
-				},
-				"cpp-check-lint.cppcheck.--std_c=": {
-					"type": "string",
-					"default": "c89",
-					"enum": [
-						"c89",
-						"c99",
-						"c11"
-					]
-				},
-				"cpp-check-lint.cppcheck.--std_c++=": {
-					"type": "string",
-					"default": "c++03",
-					"enum": [
-						"c++03",
-						"c++11",
-						"c++14",
-						"c++17",
-						"c++20"
-					]
-				},
-				"cpp-check-lint.cppcheck.--template=": {
-					"type": "string",
-					"default": "{file}:{line}:{column}: {severity}: CWE-{cwe} {message}:[{id}]",
-					"enum": [
-						"{file}:{line}:{column}: {severity}: CWE-{cwe} {message}:[{id}]"
-					]
-				},
-				"cpp-check-lint.cppcheck.--max-ctu-depth=": {
-					"type": [
-						"number",
-						"null"
-					],
-					"default": 2,
-					"description": "Max depth in whole program analysis. The default value\r\nis 2. A larger value will mean more errors can be found\r\nbut also means the analysis will be slower."
-				},
-				"cpp-check-lint.cppcheck.--suppress=": {
-					"type": "array",
-					"default": [
-						"unmatchedSuppression",
-						"missingIncludeSystem"
-					],
-					"description": "--suppress=<spec>    Suppress warnings that match <spec>. The format of\r\n                     <spec> is:\r\n                     [error id]:[filename]:[line]\r\n                     The [filename] and [line] are optional. If [error id]\r\n                     is a wildcard '*', all error ids match."
-				},
-				"cpp-check-lint.cppcheck.--suppressions-list=": {
-					"type": "string",
-					"default": "",
-					"description": "--suppressions-list=<file>\r\n                     Suppress warnings listed in the file. Each suppression\r\n                     is in the same format as <spec> above."
-				},
-				"cpp-check-lint.cppcheck.-D": {
-					"type": "array",
-					"examples": [[
-						"DUBUG",
-						"WIN32"
-					]],
-					"default": [],
-					"description": "Define preprocessor symbol. Unless --max-configs or\r\n--force is used, Cppcheck will only check the given\r\nconfiguration when -D is used.\r\nExample: [DEBUG,WIN32]."
-				},
-				"cpp-check-lint.cppcheck.-I ": {
-					"type": "array",
-					"examples": [[
-						"src/lib",
-						"src/utils"
-					]],
-					"default": [],
-					"description": "Give paths to search for include files\r\n auto add base path"
-				},
-				"cpp-check-lint.cppcheck.-U": {
-					"type": "array",
-					"examples": [[
-						"DUBUG",
-						"WIN32"
-					]],
-					"default": [],
-					"description": "   Undefine preprocessor symbol. Use -U to explicitly\r\nhide certain #ifdef <ID> code paths from checking.\t\nExample: '[DEBUG,WIN32]'"
-				},
 				"cpp-check-lint.cpplint.--enable": {
 					"type": "boolean",
 					"default": true,
@@ -381,7 +132,7 @@
 				},
 				"cpp-check-lint.cpplint.--executable": {
 					"type": "string",
-					"default": "cpplint",
+					"default": "",
 					"description": "The path to the cpplint executable(builtin binaries will be used if empty or run error)."
 				},
 				"cpp-check-lint.cpplint.--lintdir=": {
@@ -401,7 +152,7 @@
 				},
 				"cpp-check-lint.cpplint.--verbose=": {
 					"type": "number",
-					"default": 1,
+					"default": 0,
 					"enum": [
 						0,
 						1,
@@ -421,7 +172,7 @@
 				},
 				"cpp-check-lint.cpplint.--filter=": {
 					"type": "string",
-					"default": "",
+					"default": "-,+ecen330",
 					"description": "filter=-x,+y,...\r\n  Specify a comma-separated list of category-filters to apply: only\r\n  error messages whose category names pass the filters will be printed.\r\n  (Category names are printed with the message and look like\r\n  \"[whitespace/indent]\".)  Filters are evaluated left to right.\r\n  \"-FOO\" and \"FOO\" means \"do not print categories that start with FOO\".\r\n  \"+FOO\" means \"do print categories that start with FOO\".\r\n\r\n  Examples: -whitespace,+whitespace/braces\r\n whitespace,runtime/printf,+runtime/printf_format\r\n -,+build/include_what_you_use\r\n\r\n  To see a list of all the categories used in cpplint, pass no arg:\r\n  --filter="
 				},
 				"cpp-check-lint.cpplint.--counting=": {
@@ -465,10 +216,12 @@
 				},
 				"cpp-check-lint.cpplint.--exclude=": {
 					"type": "array",
-					"examples": [[
-						"build",
-						"src/utils"
-					]],
+					"examples": [
+						[
+							"build",
+							"src/utils"
+						]
+					],
 					"default": [],
 					"description": "exclude=path\r\n  Exclude the given path from the list of files to be linted. Relative\r\n  paths are evaluated relative to the current directory and shell globbing\r\n  is performed. This flag can be provided multiple times to exclude\r\n  multiple files.\r\n\r\n  Examples:'[\"one.cc\",\"build\",\"test/*.cc\"]'"
 				},
@@ -489,7 +242,7 @@
 		"lint": "eslint .",
 		"pretest": "npm run lint",
 		"test": "node ./test/runTest.js",
-		"vsce":"npm i vsce -g",
+		"vsce": "npm i vsce -g",
 		"publish": "vsce publish",
 		"package": "vsce package"
 	},
@@ -506,10 +259,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/QiumingGe/cpp-check-lint"
+		"url": "https://github.com/sbg97/byuecen330cpplint-vscode"
 	},
 	"bugs": {
-		"url": "https://github.com/QiumingGe/cpp-check-lint/issues"
+		"url": "https://github.com/sbg97/byuecen330cpplint-vscode/issues"
 	},
 	"license": "MIT"
 }

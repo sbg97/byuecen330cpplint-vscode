@@ -20,14 +20,17 @@ class cpplint {
     }
 
     /**
-    * 解析并替换路径中的 ${workspaceFolder} 变量
+    * Parse and replace the ${workspaceFolder} variable in the path
     * @param {string} str
     * @returns {string}
     */
     replaceWorkspaceFolder(str) {
-        let workspaceFolder = vscode.workspace.workspaceFolders[0].uri.fsPath;
-        workspaceFolder = workspaceFolder.replace(/\\/g, "/");
-        return str.replace("${workspaceFolder}", workspaceFolder);
+        if (vscode.workspace.workspaceFolders != undefined) {
+            let workspaceFolder = vscode.workspace.workspaceFolders[0].uri.fsPath;
+            workspaceFolder = workspaceFolder.replace(/\\/g, "/");
+            return str.replace("${workspaceFolder}", workspaceFolder);
+        }
+        return str;
     }
 
     get_cfg() {
@@ -49,7 +52,7 @@ class cpplint {
                 }
             }
         }
-        
+
         let exclude = this.base.get_cfg(this.settings, "--exclude=", false, []);
         if (0 != exclude.length) {
             for (let value of exclude) {
