@@ -10,13 +10,13 @@ let cpplint_obj = new cpplint.cpplint();
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-	log.info('Congratulations, your extension "cpp-check-lint" is now active!');
-	let settings = vscode.workspace.getConfiguration('cpp-check-lint');
+	log.info('Congratulations, your extension "byuecen330cpplint-vscode" is now active!');
+	let settings = vscode.workspace.getConfiguration('byuecen330cpplint-vscode');
 	log.setLogLevel(settings.get('--log'));
 	if (settings.get('--enable') === true) {
-		log.info('start cpp-check-lint extension!');
+		log.info('start byuecen330cpplint-vscode extension!');
 	} else {
-		log.info('disable cpp-check-lint extension!');
+		log.info('disable byuecen330cpplint-vscode extension!');
 		return;
 	}
 	log.info("context.asAbsolutePath : " + context.extensionPath);
@@ -25,17 +25,17 @@ function activate(context) {
 
 	cpplint_obj.set_root_path(context.extensionPath);
 
-	let tmp = vscode.commands.registerCommand('cpp-check-lint.cpplint', (url) => { cpplint_obj.activate(context, url, true); });
+	let tmp = vscode.commands.registerCommand('byuecen330cpplint-vscode.cpplint', (url) => { cpplint_obj.activate(context, url, true); });
 	context.subscriptions.push(tmp);
-	tmp = vscode.commands.registerCommand('cpp-check-lint.cpplintdir', (url) => { cpplint_obj.activate(context, url, false); });
+	tmp = vscode.commands.registerCommand('byuecen330cpplint-vscode.cpplintdir', (url) => { cpplint_obj.activate(context, url, false); });
 	context.subscriptions.push(tmp);
-	tmp = vscode.commands.registerCommand('cpp-check-lint.cpplintcmd', (url) => { cpplint_obj.on_cmd(context, url); });
+	tmp = vscode.commands.registerCommand('byuecen330cpplint-vscode.cpplintcmd', (url) => { cpplint_obj.on_cmd(context, url); });
 	context.subscriptions.push(tmp);
 	tmp = vscode.languages.registerCodeActionsProvider(support_language, cpplint_obj);
 	context.subscriptions.push(tmp);
 
 	tmp = vscode.workspace.onDidChangeConfiguration(function (event) {
-		let new_settings = vscode.workspace.getConfiguration('cpp-check-lint');
+		let new_settings = vscode.workspace.getConfiguration('byuecen330cpplint-vscode');
 		log.setLogLevel(new_settings.get('--log'));
 		log.info("onDidChangeConfiguration");
 		cpplint_obj.update_setting();
@@ -71,7 +71,7 @@ function activate(context) {
 // this method is called when your extension is deactivated
 function deactivate() {
 	cpplint_obj.deactivate();
-	console.log('a oh, your extension "cpp-check-lint" is now deactivate!');
+	console.log('a oh, your extension "byuecen330cpplint-vscode" is now deactivate!');
 }
 
 module.exports = {

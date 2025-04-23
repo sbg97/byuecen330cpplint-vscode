@@ -89,7 +89,7 @@ class cpplint {
     }
 
     update_setting() {
-        this.settings = vscode.workspace.getConfiguration('cpp-check-lint.cpplint');
+        this.settings = vscode.workspace.getConfiguration('byuecen330cpplint-vscode.cpplint');
         this.quick_fix = this.base.get_cfg_value(this.settings, "--quick_fix", false);
         this.onsave = this.base.get_cfg_value(this.settings, "--onsave", false);
         this.lintdirparm = this.base.get_cfg(this.settings, "--recursive", true);

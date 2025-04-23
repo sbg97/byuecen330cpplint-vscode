@@ -23,86 +23,86 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "cpp-check-lint.cpplint",
+				"command": "byuecen330cpplint-vscode.cpplint",
 				"title": "cpplint-file"
 			},
 			{
-				"command": "cpp-check-lint.cpplintdir",
+				"command": "byuecen330cpplint-vscode.cpplintdir",
 				"title": "cpplint-dir"
 			},
 			{
-				"command": "cpp-check-lint.cpplintcmd",
+				"command": "byuecen330cpplint-vscode.cpplintcmd",
 				"title": "cpplint-cmd"
 			}
 		],
 		"menus": {
 			"editor/context": [
 				{
-					"submenu": "cpp-check-lint.editor.context",
-					"group": "cpp-check-lint"
+					"submenu": "byuecen330cpplint-vscode.editor.context",
+					"group": "byuecen330cpplint-vscode"
 				}
 			],
-			"cpp-check-lint.editor.context": [
+			"byuecen330cpplint-vscode.editor.context": [
 				{
 					"when": "resourceLangId == c || resourceLangId == cpp || resourceLangId == h || resourceLangId == hpp",
-					"command": "cpp-check-lint.cpplint",
-					"group": "cpp-check-lint"
+					"command": "byuecen330cpplint-vscode.cpplint",
+					"group": "byuecen330cpplint-vscode"
 				},
 				{
 					"when": "resourceLangId == c || resourceLangId == cpp || resourceLangId == h || resourceLangId == hpp",
-					"command": "cpp-check-lint.cpplintdir",
-					"group": "cpp-check-lint"
+					"command": "byuecen330cpplint-vscode.cpplintdir",
+					"group": "byuecen330cpplint-vscode"
 				},
 				{
 					"when": "resourceLangId == c || resourceLangId == cpp || resourceLangId == h || resourceLangId == hpp",
-					"command": "cpp-check-lint.cpplintcmd",
-					"group": "cpp-check-lint"
+					"command": "byuecen330cpplint-vscode.cpplintcmd",
+					"group": "byuecen330cpplint-vscode"
 				}
 			],
 			"explorer/context": [
 				{
-					"submenu": "cpp-check-lint.explorer.context",
-					"group": "cpp-check-lint"
+					"submenu": "byuecen330cpplint-vscode.explorer.context",
+					"group": "byuecen330cpplint-vscode"
 				}
 			],
-			"cpp-check-lint.explorer.context": [
+			"byuecen330cpplint-vscode.explorer.context": [
 				{
 					"when": "resourceLangId == c || resourceLangId == cpp || resourceLangId == h || resourceLangId == hpp",
-					"command": "cpp-check-lint.cpplint",
-					"group": "cpp-check-lint"
+					"command": "byuecen330cpplint-vscode.cpplint",
+					"group": "byuecen330cpplint-vscode"
 				},
 				{
 					"when": "explorerResourceIsFolder",
-					"command": "cpp-check-lint.cpplintdir",
-					"group": "cpp-check-lint"
+					"command": "byuecen330cpplint-vscode.cpplintdir",
+					"group": "byuecen330cpplint-vscode"
 				},
 				{
 					"when": "resourceLangId == c || resourceLangId == cpp || resourceLangId == h || resourceLangId == hpp || explorerResourceIsFolder",
-					"command": "cpp-check-lint.cpplintcmd",
-					"group": "cpp-check-lint"
+					"command": "byuecen330cpplint-vscode.cpplintcmd",
+					"group": "byuecen330cpplint-vscode"
 				}
 			]
 		},
 		"submenus": [
 			{
-				"id": "cpp-check-lint.editor.context",
-				"label": "cpp-check-lint"
+				"id": "byuecen330cpplint-vscode.editor.context",
+				"label": "byuecen330cpplint-vscode"
 			},
 			{
-				"id": "cpp-check-lint.explorer.context",
-				"label": "cpp-check-lint"
+				"id": "byuecen330cpplint-vscode.explorer.context",
+				"label": "byuecen330cpplint-vscode"
 			}
 		],
 		"configuration": {
 			"type": "object",
-			"title": "cpp-check-lint",
+			"title": "byuecen330cpplint-vscode",
 			"properties": {
-				"cpp-check-lint.--enable": {
+				"byuecen330cpplint-vscode.--enable": {
 					"type": "boolean",
 					"default": true,
-					"description": "Enable or disable the cpp-check-lint"
+					"description": "Enable or disable the byuecen330cpplint-vscode"
 				},
-				"cpp-check-lint.--log": {
+				"byuecen330cpplint-vscode.--log": {
 					"type": "number",
 					"default": 4,
 					"enum": [
@@ -120,37 +120,37 @@
 						"Debug"
 					]
 				},
-				"cpp-check-lint.cpplint.--enable": {
+				"byuecen330cpplint-vscode.cpplint.--enable": {
 					"type": "boolean",
 					"default": true,
 					"description": "Enable or disable the cpplint"
 				},
-				"cpp-check-lint.cpplint.--customargs=": {
+				"byuecen330cpplint-vscode.cpplint.--customargs=": {
 					"type": "array",
 					"default": [],
 					"description": "customargs"
 				},
-				"cpp-check-lint.cpplint.--executable": {
+				"byuecen330cpplint-vscode.cpplint.--executable": {
 					"type": "string",
 					"default": "",
 					"description": "The path to the cpplint executable(builtin binaries will be used if empty or run error)."
 				},
-				"cpp-check-lint.cpplint.--lintdir=": {
+				"byuecen330cpplint-vscode.cpplint.--lintdir=": {
 					"type": "string",
 					"default": "",
 					"description": "The param for lint dir."
 				},
-				"cpp-check-lint.cpplint.--quick_fix": {
+				"byuecen330cpplint-vscode.cpplint.--quick_fix": {
 					"type": "boolean",
 					"default": true,
 					"description": "Whether to enable experimental \"Quick Fix\" feature."
 				},
-				"cpp-check-lint.cpplint.--onsave": {
+				"byuecen330cpplint-vscode.cpplint.--onsave": {
 					"type": "boolean",
 					"default": true,
 					"description": "Whether cpplint is run on save"
 				},
-				"cpp-check-lint.cpplint.--verbose=": {
+				"byuecen330cpplint-vscode.cpplint.--verbose=": {
 					"type": "number",
 					"default": 0,
 					"enum": [
@@ -163,19 +163,19 @@
 					],
 					"description": "verbose=#\r\n  Specify a number 0-5 to restrict errors to certain verbosity levels.\r\n  Errors with lower verbosity levels have lower confidence and are more\r\n  likely to be false positives."
 				},
-				"cpp-check-lint.cpplint.--output=": {
+				"byuecen330cpplint-vscode.cpplint.--output=": {
 					"type": "string",
 					"default": "eclipse",
 					"enum": [
 						"eclipse"
 					]
 				},
-				"cpp-check-lint.cpplint.--filter=": {
+				"byuecen330cpplint-vscode.cpplint.--filter=": {
 					"type": "string",
 					"default": "-,+ecen330",
 					"description": "filter=-x,+y,...\r\n  Specify a comma-separated list of category-filters to apply: only\r\n  error messages whose category names pass the filters will be printed.\r\n  (Category names are printed with the message and look like\r\n  \"[whitespace/indent]\".)  Filters are evaluated left to right.\r\n  \"-FOO\" and \"FOO\" means \"do not print categories that start with FOO\".\r\n  \"+FOO\" means \"do print categories that start with FOO\".\r\n\r\n  Examples: -whitespace,+whitespace/braces\r\n whitespace,runtime/printf,+runtime/printf_format\r\n -,+build/include_what_you_use\r\n\r\n  To see a list of all the categories used in cpplint, pass no arg:\r\n  --filter="
 				},
-				"cpp-check-lint.cpplint.--counting=": {
+				"byuecen330cpplint-vscode.cpplint.--counting=": {
 					"type": "string",
 					"default": "detailed",
 					"enum": [
@@ -186,17 +186,17 @@
 					],
 					"description": "counting=total|toplevel|detailed\r\n  The total number of errors found is always printed. If\r\n  'toplevel' is provided, then the count of errors in each of\r\n  the top-level categories like 'build' and 'whitespace' will\r\n  also be printed. If 'detailed' is provided, then a count\r\n  is provided for each category like 'build/class'."
 				},
-				"cpp-check-lint.cpplint.--root=": {
+				"byuecen330cpplint-vscode.cpplint.--root=": {
 					"type": "string",
 					"default": "",
 					"description": "root=subdir\r\n  The root directory used for deriving header guard CPP variable.\r\n  This directory is relative to the top level directory of the repository\r\n  which by default is determined by searching for a directory that contains\r\n  .git, .hg, or .svn but can also be controlled with the --repository flag.\r\n  If the specified directory does not exist, this flag is ignored.\r\n\r\n  Examples:\r\n    Assuming that src is the top level directory of the repository (and\r\n    cwd=top/src), the header guard CPP variables for\r\n    src/chrome/browser/ui/browser.h are:\r\n\r\n    No flag => CHROME_BROWSER_UI_BROWSER_H_\r\n    --root=chrome => BROWSER_UI_BROWSER_H_\r\n    --root=chrome/browser => UI_BROWSER_H_\r\n    --root=.. => SRC_CHROME_BROWSER_UI_BROWSER_H_"
 				},
-				"cpp-check-lint.cpplint.--repository=": {
+				"byuecen330cpplint-vscode.cpplint.--repository=": {
 					"type": "string",
 					"default": "",
 					"description": "repository=path\r\n  The top level directory of the repository, used to derive the header\r\n  guard CPP variable. By default, this is determined by searching for a\r\n  path that contains .git, .hg, or .svn. When this flag is specified, the\r\n  given path is used instead. This option allows the header guard CPP\r\n  variable to remain consistent even if members of a team have different\r\n  repository root directories (such as when checking out a subdirectory\r\n  with SVN). In addition, users of non-mainstream version control systems\r\n  can use this flag to ensure readable header guard CPP variables.\r\n\r\n  Examples:\r\n    Assuming that Alice checks out ProjectName and Bob checks out\r\n    ProjectName/trunk and trunk contains src/chrome/ui/browser.h, then\r\n    with no --repository flag, the header guard CPP variable will be:\r\n\r\n    Alice => TRUNK_SRC_CHROME_BROWSER_UI_BROWSER_H_\r\n    Bob   => SRC_CHROME_BROWSER_UI_BROWSER_H_\r\n\r\n    If Alice uses the --repository=trunk flag and Bob omits the flag or\r\n    uses --repository=. then the header guard CPP variable will be:\r\n\r\n    Alice => SRC_CHROME_BROWSER_UI_BROWSER_H_\r\n    Bob   => SRC_CHROME_BROWSER_UI_BROWSER_H_"
 				},
-				"cpp-check-lint.cpplint.--linelength=": {
+				"byuecen330cpplint-vscode.cpplint.--linelength=": {
 					"type": [
 						"number",
 						"null"
@@ -204,17 +204,17 @@
 					"default": 120,
 					"description": "linelength=digits\r\n  This is the allowed line length for the project. The default value is\r\n  80 characters.\r\n\r\n  Examples:\r\n    --linelength=120"
 				},
-				"cpp-check-lint.cpplint.--headers=": {
+				"byuecen330cpplint-vscode.cpplint.--headers=": {
 					"type": "string",
 					"default": "hxx,h++,hh,h,cuh,hpp",
 					"description": "headers=x,y,...\r\n  The header extensions that cpplint will treat as .h in checks. Values are\r\n  automatically added to --extensions list.\r\n (by default, only files with extensions {'hxx', 'h++', 'hh', 'h', 'cuh', 'hpp'} will be assumed to be hea\r\n\r\n  Examples:\r\n    --headers=hxx,h++,hh,h,cuh,hpp\r\n    --headers=hpp,hxx\r\n    --headers=hpp"
 				},
-				"cpp-check-lint.cpplint.--recursive": {
+				"byuecen330cpplint-vscode.cpplint.--recursive": {
 					"type": "boolean",
 					"default": true,
 					"description": "Search for files to lint recursively. Each directory given in the list\r\nof files to be linted is replaced by all files that descend from that\r\ndirectory. Files with extensions not in the valid extensions list are\r\nexcluded."
 				},
-				"cpp-check-lint.cpplint.--exclude=": {
+				"byuecen330cpplint-vscode.cpplint.--exclude=": {
 					"type": "array",
 					"examples": [
 						[
@@ -225,12 +225,12 @@
 					"default": [],
 					"description": "exclude=path\r\n  Exclude the given path from the list of files to be linted. Relative\r\n  paths are evaluated relative to the current directory and shell globbing\r\n  is performed. This flag can be provided multiple times to exclude\r\n  multiple files.\r\n\r\n  Examples:'[\"one.cc\",\"build\",\"test/*.cc\"]'"
 				},
-				"cpp-check-lint.cpplint.--extensions=": {
+				"byuecen330cpplint-vscode.cpplint.--extensions=": {
 					"type": "string",
 					"default": "hxx,h++,cxx,cc,hh,h,cpp,cuh,c,hpp,c++,cu",
 					"description": "extensions=extension,extension,...\r\n  The allowed file extensions that cpplint will check\r\n\r\nExamples:\r\n  --extensions=hxx,h++,cxx,cc,hh,h,cpp,cuh,c,hpp,c++,cu"
 				},
-				"cpp-check-lint.cpplint.--includeorder=": {
+				"byuecen330cpplint-vscode.cpplint.--includeorder=": {
 					"type": "string",
 					"default": "",
 					"description": "includeorder=default|standardcfirst\r\n  For the build/include_order rule, the default is to blindly assume angle\r\n  bracket includes with file extension are c-system-headers (default),\r\n  even knowing this will have false classifications.\r\n  The default is established at google.\r\n  standardcfirst means to instead use an allow-list of known c headers and\r\n  treat all others as separate group of \"other system headers\". The C headers\r\n  included are those of the C-standard lib and closely related ones."
