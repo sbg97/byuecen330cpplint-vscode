@@ -6,8 +6,8 @@
 		"cpplint",
 		"BYU ECEN 330"
 	],
-	"version": "1.0.0",
-	"publisher": "Stephen Griffith",
+	"version": "0.1.2",
+	"publisher": "QiuMingGe",
 	"engines": {
 		"vscode": "^1.75.0"
 	},

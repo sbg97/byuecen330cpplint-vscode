@@ -7410,23 +7410,21 @@ def CheckCommentBeforeScopeDef5_3(filename, clean_lines, linenum, error):
         for inside_line in inside_lines:
             if not IsBlankLine(inside_line):
                 num_lines_inside += 1
-        if num_lines_inside > 3:
+        if num_lines_inside > 4:
             # check if there is a comment before or after
-            # before
-            # print("V11", clean_lines.lines_without_raw_strings[linenum - 1])
-            # print("V21", clean_lines.lines[linenum - 1])
-            # print("V12", clean_lines.lines_without_raw_strings[linenum + 1])
-            # print("V22", clean_lines.lines[linenum + 1])
+            # before by comparing lines_without_raw_strings and lines
             if (linenum == 1 or clean_lines.lines_without_raw_strings[linenum - 1] == clean_lines.lines[linenum - 1]) and clean_lines.lines_without_raw_strings[linenum + 1] == clean_lines.lines[linenum + 1]:
                 error(
-                    filename, linenum, "ecen330/comments", 3, "Scopes longer than 3 lines need comments"
+                    filename, linenum, "ecen330/comments", 3, "Scopes longer than 4 lines need comments"
                 )
                 
 
 
-def CheckNoMagicNumbers7_1(filename, clean_lines, linenum, error):
+def CheckNoMagicNumbers7_1(filename, clean_lines, linenum, function_state, nesting_state, error):
     """ Check if there are any magic numbers that aren't #define-ed
-    Limitation: Can't tell the difference between binary -1 and unary -1.
+    Limitation: Can't tell the difference between binary -2 and unary -2.
+    Limitation: Can't tell that you are in a "test" function if it's on the same line as the declaration
+    Limitation: Can't tell if you are defining a const array[] if the '{' is on a different line
     """
     line = clean_lines.elided[linenum]
     if IsMacroDefinition(clean_lines.elided, linenum):
@@ -7434,8 +7432,21 @@ def CheckNoMagicNumbers7_1(filename, clean_lines, linenum, error):
     pattern = r"(?<!\w)(?:0[xX])?(?:(\d+(\.\d*)?)(?:[eEpP][+-]?\d+)?)"
     match = re.search(pattern, line)
     if match:
+        # OK if we are in a function that includes "test" in the name
+        if function_state.current_function.lower().find("test") != -1:
+            return
+        # OK if we are defining a const array[]
+        pattern = r"\bconst\b([^=]*\[)"
+        if re.search(pattern, line):
+            return
+        if nesting_state.previous_stack_top:
+            start_linenum = nesting_state.previous_stack_top.starting_linenum
+            start_line = clean_lines.elided[start_linenum]
+            if re.search(pattern, start_line):
+                return
+        # OK if the number is one of -1, 0, 1, 2
         captured_number = match.group(1)
-        if captured_number != "0" and captured_number != "0.0" and captured_number != "1" and captured_number != "1.0":
+        if captured_number != "0" and captured_number != "0.0" and captured_number != "1" and captured_number != "1.0" and captured_number != "2" and captured_number != "2.0":
             error(
                 filename, linenum, "ecen330/magic_numbers", 4, "Numbers must be #define-ed"
             )
@@ -7518,7 +7529,7 @@ def ProcessLine(
     CheckCommentBeforeFunctionDef5_2(filename, clean_lines, line, error)
     CheckCommentBeforeScopeDef5_3(filename, clean_lines, line, error)
     # 6_1 use clang_format - won't check
-    CheckNoMagicNumbers7_1(filename, clean_lines, line, error)
+    CheckNoMagicNumbers7_1(filename, clean_lines, line, function_state, nesting_state, error)
     CheckNoConstExceptArray8_1(filename, clean_lines, line, error)
     # 9 state machine stuff - maybe? probably not
     if extra_check_functions:
