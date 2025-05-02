@@ -6,8 +6,8 @@
 		"cpplint",
 		"BYU ECEN 330"
 	],
-	"version": "0.1.2",
-	"publisher": "QiuMingGe",
+	"version": "1.0.0",
+	"publisher": "StephenGriffith",
 	"engines": {
 		"vscode": "^1.75.0"
 	},
@@ -172,7 +172,7 @@
 				},
 				"byuecen330cpplint-vscode.cpplint.--filter=": {
 					"type": "string",
-					"default": "-,+ecen330",
+					"default": "-,+ecen330,-ecen330/miscellaneous",
 					"description": "filter=-x,+y,...\r\n  Specify a comma-separated list of category-filters to apply: only\r\n  error messages whose category names pass the filters will be printed.\r\n  (Category names are printed with the message and look like\r\n  \"[whitespace/indent]\".)  Filters are evaluated left to right.\r\n  \"-FOO\" and \"FOO\" means \"do not print categories that start with FOO\".\r\n  \"+FOO\" means \"do print categories that start with FOO\".\r\n\r\n  Examples: -whitespace,+whitespace/braces\r\n whitespace,runtime/printf,+runtime/printf_format\r\n -,+build/include_what_you_use\r\n\r\n  To see a list of all the categories used in cpplint, pass no arg:\r\n  --filter="
 				},
 				"byuecen330cpplint-vscode.cpplint.--counting=": {
