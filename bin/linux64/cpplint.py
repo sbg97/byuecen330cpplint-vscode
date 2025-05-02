@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # Copyright (c) 2009 Google Inc. All rights reserved.
 #
@@ -7291,7 +7291,7 @@ def CheckHeaderIncluded2_2(filename, include_state, error):
     first_include = message = None
     basefilename = filename[0 : len(filename) - len(fileinfo.Extension())]
     headerfile = basefilename + ".h"
-    if filename == "main.c":
+    if fileinfo.BaseName() == "main":
         return
     headername = FileInfo(headerfile).RepositoryName()
     for section_list in include_state.include_list:
@@ -7314,7 +7314,9 @@ def CheckNamesMatchHeader3_1(filename, clean_lines, linenum, file_extension, err
     if IsHeaderExtension(file_extension):
         line = clean_lines.elided[linenum]
         # get the name that it needs to be prefixed by
-        prefix = filename[:filename.rfind(".")].lower()+"_"
+        fileinfo = FileInfo(filename)
+        prefix = fileinfo.BaseName().lower()+"_"
+        print(prefix)
         # see if we are defining a #define macro
         pattern = r"^\s*#define\s+(\w+)"
         match = re.match(pattern, line)
@@ -7354,7 +7356,7 @@ def CheckOnlyStdintIntegers4_1(filename, clean_lines, linenum, error):
     # match a bunch of integer types
     # long double isn't an integer type
     # int main() is allowed
-    pattern = r"\b(?:(char(16_t|32_t)?)|wchar_t|bool|short|int(?!\s+main\b)|long(?!\s+double\b)|signed|unsigned|(ptrdiff_t|size_t|max_align_t|nullptr_t))\b"
+    pattern = r"\b(?:short|int(?!\s+main\b)|long(?!\s+double\b)|signed|unsigned)\b"
     if re.search(pattern, line):
         error(
             filename, linenum, "ecen330/data_types", 3, "Only use stdint integer types (unless used for file io or main return value)"
@@ -7404,16 +7406,19 @@ def CheckCommentBeforeScopeDef5_3(filename, clean_lines, linenum, error):
             if re.search(r"\belse\b", clean_lines.elided[linenum - 1]):
                 return
         text_inside = _GetTextInside(line_and_future_lines, r"\{")
-        # count to see if there are more than 3 lines
+        # count to see if there are more than 4 lines
         inside_lines = text_inside.split("\n")
         num_lines_inside = 0
         for inside_line in inside_lines:
             if not IsBlankLine(inside_line):
                 num_lines_inside += 1
+                #OK if we find a comment
+                if clean_lines.lines_without_raw_strings[linenum + num_lines_inside] != clean_lines.lines[linenum + num_lines_inside]:
+                    return
         if num_lines_inside > 4:
             # check if there is a comment before or after
             # before by comparing lines_without_raw_strings and lines
-            if (linenum == 1 or clean_lines.lines_without_raw_strings[linenum - 1] == clean_lines.lines[linenum - 1]) and clean_lines.lines_without_raw_strings[linenum + 1] == clean_lines.lines[linenum + 1]:
+            if (linenum == 1 or clean_lines.lines_without_raw_strings[linenum - 1] == clean_lines.lines[linenum - 1]) and  clean_lines.lines_without_raw_strings[linenum] == clean_lines.lines[linenum]:
                 error(
                     filename, linenum, "ecen330/comments", 3, "Scopes longer than 4 lines need comments"
                 )
