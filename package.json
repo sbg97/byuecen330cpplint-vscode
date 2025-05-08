@@ -6,7 +6,7 @@
 		"cpplint",
 		"BYU ECEN 330"
 	],
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"publisher": "StephenGriffith",
 	"engines": {
 		"vscode": "^1.75.0"

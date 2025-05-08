@@ -19,7 +19,7 @@ int main()
   int i = -1;
   long double j = 0.0f;
   uint64_t k = 90;
-  const l = 2;
+  const l = 2 + 7;
   const m[2] = {0, 0};
   // will this int trigger stuff?
   return i;

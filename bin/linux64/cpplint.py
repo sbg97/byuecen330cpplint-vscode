@@ -7436,19 +7436,19 @@ def CheckNoMagicNumbers7_1(filename, clean_lines, linenum, function_state, nesti
         return
     pattern = r"(?<!\w)(?:0[xX])?(?:(\d+(\.\d*)?)(?:[eEpP][+-]?\d+)?)"
     match = re.search(pattern, line)
-    if match:
+    for match in re.finditer(pattern, line):
         # OK if we are in a function that includes "test" in the name
         if function_state.current_function.lower().find("test") != -1:
-            return
+            continue
         # OK if we are defining a const array[]
         pattern = r"\bconst\b([^=]*\[)"
         if re.search(pattern, line):
-            return
+            continue
         if nesting_state.previous_stack_top:
             start_linenum = nesting_state.previous_stack_top.starting_linenum
             start_line = clean_lines.elided[start_linenum]
             if re.search(pattern, start_line):
-                return
+                continue
         # OK if the number is one of -1, 0, 1, 2
         captured_number = match.group(1)
         if captured_number != "0" and captured_number != "0.0" and captured_number != "1" and captured_number != "1.0" and captured_number != "2" and captured_number != "2.0":
