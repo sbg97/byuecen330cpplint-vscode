@@ -7278,11 +7278,25 @@ def CheckNoHeaderExecutableCode2_1(filename, clean_lines, linenum, file_extensio
     maybe do this by disallowing "{" and "="
     """
     if IsHeaderExtension(file_extension):
+        if(IsMacroDefinition(clean_lines.elided, linenum)):
+            # ignore if part of a #define
+            return
         line = clean_lines.elided[linenum]
-        pattern = r"=|\{"
-        match = re.search(pattern, line)
-        if match:
+        # '=' is never allowed
+        if re.search(r"=", line):
             error(filename, linenum, "ecen330/files", 4, "Header files should not contain executable code, including function definitions and variable definitions")
+        # '{' is not allowed as part of a function definition
+        if re.search(r"\{", line):
+            # bad if this line has a function
+            if re.search(r"(\w(\w|::|\*|\&|\s)*)\(", line):
+                error(filename, linenum, "ecen330/files", 4, "Header files should not contain executable code, including function definitions and variable definitions")
+        match = re.search(r"^\s*{", line)
+        if match:
+            # bad if the line before has a function
+            if re.search(r"(\w(\w|::|\*|\&|\s)*)\(", clean_lines.elided[linenum - 1]):
+                error(filename, linenum, "ecen330/files", 4, "Header files should not contain executable code, including function definitions and variable definitions")
+        
+
 def CheckHeaderIncluded2_2(filename, include_state, error):
     """ If in a .c file other than main.c, make sure you #include the corresponding .h file
     """
@@ -7305,6 +7319,8 @@ def CheckHeaderIncluded2_2(filename, include_state, error):
     message = f"{fileinfo.RepositoryName()} should include its header file {headername}"
 
     if message:
+        if(not first_include):
+            first_include = 1
         error(filename, first_include, "ecen330/files", 4, message)
 
 def CheckNamesMatchHeader3_1(filename, clean_lines, linenum, file_extension, error):
@@ -7392,6 +7408,7 @@ def CheckCommentBeforeFunctionDef5_2(filename, clean_lines, linenum, error):
 def CheckCommentBeforeScopeDef5_3(filename, clean_lines, linenum, error):
     """ Make sure all scopes {} have comments associated with them
     check line before and line after '{'
+    And if line before is a function, ignore because that is checked by 5_2
     """
     line = clean_lines.elided[linenum]
     line_and_future_lines = '\n'.join(clean_lines.elided[linenum:])
@@ -7401,9 +7418,14 @@ def CheckCommentBeforeScopeDef5_3(filename, clean_lines, linenum, error):
         # or this line has nothing before '{' and the previous line contains an else
         # ignore it
         if re.search(r"\belse\b", line):
+            # the { is for an else, OK
             return
         if re.search(r"^\s*{", line):
             if re.search(r"\belse\b", clean_lines.elided[linenum - 1]):
+                # the { is for an else, OK
+                return
+            if re.match(r"(\w(\w|::|\*|\&|\s)*)\(", clean_lines.elided[linenum - 1]):
+                # the { is for a function, see 5_2
                 return
         text_inside = _GetTextInside(line_and_future_lines, r"\{")
         # count to see if there are more than 4 lines
